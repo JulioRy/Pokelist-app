@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PokemonCard from "./components/PokemonCard";
 import Banner from "./components/Banner";
+import PokemonInfos from "./components/PokemonInfos";
+import Form from "./components/Form";
 
 function App() {
-  const listPokemon = [
+  const [listPokemon, setListPokemon] = useState([
     {
       nome: "Arcanine",
       type: "Fire",
@@ -149,33 +151,28 @@ function App() {
       type: "Bug",
       image: "/images/weedle.png",
     },
-  ];
+  ]);
 
-// Sort the listPokemon array based on the type property
-listPokemon.sort((a, b) => a.type.localeCompare(b.type));
-
-// Sort the listPokemon array based on the nome property within the same type
-listPokemon.sort((a, b) => {
-  if (a.type === b.type) {
-    return a.nome.localeCompare(b.nome);
-  }
-  return 0;
-});
-
-
+  const addNewPokemon = (newPokemon) => {
+    setListPokemon((prevListPokemon) => [...prevListPokemon, newPokemon]);
+  };
 
   return (
     <div className="App">
       <Banner />
+      <Form addNewPokemon={addNewPokemon} />
       <h1>Pokedex</h1>
       <div className="pokedex">
-        {listPokemon.map((pokemon) => (
+        {listPokemon.map((pokemon, index) => (
           <PokemonCard
+            key={index}
             name={pokemon.nome}
             type={pokemon.type}
             image={pokemon.image}
           />
         ))}
+
+        {/* <PokemonInfos listPokemon={listPokemon} /> */}
       </div>
     </div>
   );
