@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import "./form.css";
+import './form.css'
 
 const Form = (props) => {
   const [enteredPokemonName, setEnteredPokemonName] = useState("");
